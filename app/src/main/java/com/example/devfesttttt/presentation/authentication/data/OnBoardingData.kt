@@ -1,4 +1,4 @@
-package com.example.devfesttttt.presentation
+package com.example.devfesttttt.presentation.authentication.data
 
 import com.example.devfesttttt.R
 
