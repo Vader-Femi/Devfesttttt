@@ -11,28 +11,25 @@ open class BaseViewModel @Inject constructor(
     private val repository: BaseRepositoryImpl,
 ) : ViewModel() {
 
-    private fun userEmail(email: String) = viewModelScope.launch {
+    fun userEmail(email: String) = viewModelScope.launch {
         repository.userEmail(email)
     }
 
     suspend fun userEmail(): String = repository.userEmail()
 
-    private fun userFName(fName: String) = viewModelScope.launch {
+    fun userFName(fName: String) = viewModelScope.launch {
         repository.userFName(fName)
     }
 
     suspend fun userFName(): String = repository.userFName()
 
-    private fun userLName(lName: String) = viewModelScope.launch {
+    fun userLName(lName: String) = viewModelScope.launch {
         repository.userLName(lName)
     }
 
-    suspend fun userLName(): String = repository.userLName()
+    suspend fun userSignedIn(): Boolean = repository.userSignedIn()
 
-    open suspend fun isUserNew(): Boolean {
-
-        return userEmail().isNotEmpty() &&
-            userFName().isNotEmpty() &&
-            userLName().isNotEmpty()
+    fun userSignedIn(userSignedIn: Boolean) = viewModelScope.launch {
+        repository.userSignedIn(userSignedIn)
     }
 }

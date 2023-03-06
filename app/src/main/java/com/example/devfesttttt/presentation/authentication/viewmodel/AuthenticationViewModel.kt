@@ -10,5 +10,4 @@ class AuthenticationViewModel @Inject constructor(
     repository: AuthenticationRepositoryImpl
 ) : BaseViewModel(repository) {
 
-
 }

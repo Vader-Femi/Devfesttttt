@@ -22,6 +22,9 @@ data class Agenda(
     @ColumnInfo(name = "title")
     val title: String,
 
+    @ColumnInfo(name = "speaker")
+    val speaker: String,
+
     @ColumnInfo(name = "venue")
     val venue: String,
 

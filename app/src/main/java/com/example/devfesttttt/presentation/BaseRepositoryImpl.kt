@@ -18,4 +18,8 @@ open class BaseRepositoryImpl @Inject constructor(
     override suspend fun userLName(lName: String) = dataStore.userLName(lName)
 
     override suspend fun userLName(): String = dataStore.userLName.first()
+
+    override suspend fun userSignedIn(userSignedIn: Boolean) = dataStore.userSignedIn(userSignedIn)
+
+    override suspend fun userSignedIn(): Boolean = dataStore.userSignedIn.first()
 }

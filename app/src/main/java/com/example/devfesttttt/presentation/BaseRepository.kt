@@ -13,4 +13,8 @@ interface BaseRepository{
     suspend fun userLName(lName: String)
 
     suspend fun userLName(): String
+
+    suspend fun userSignedIn(userSignedIn: Boolean)
+
+    suspend fun userSignedIn(): Boolean
 }

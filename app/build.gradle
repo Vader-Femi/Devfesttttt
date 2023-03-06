@@ -100,7 +100,13 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
     implementation "androidx.hilt:hilt-navigation:1.0.0"
 
+    //Gson
+    implementation 'com.google.code.gson:gson:2.9.1'
+
     // Room dependencies
     implementation "androidx.room:room-runtime:$room_runtime_version"
     kapt "androidx.room:room-compiler:$room_compiler_version"
+
+    // Coil image loading
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
 }

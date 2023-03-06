@@ -64,7 +64,7 @@ private fun OnBoardingViewPager(
     pagerState: PagerState,
     modifier: Modifier = Modifier,
 ) {
-    val context = LocalContext.current
+
     HorizontalPager(
         state = pagerState,
         count = item.count()
@@ -99,7 +99,7 @@ private fun OnBoardingViewPager(
                 Button(
                     colors = ButtonDefaults.secondaryButtonColors(),
                     onClick = {
-                        moveToDevFestActivity(context)
+//                        Todo Navigate
                     },
                 ) {
                     Text(text = "Let's gooooo")
@@ -121,13 +121,3 @@ private fun rememberPageState(
     )
 }
 
-@OptIn(ExperimentalPagerApi::class)
-private fun moveToDevFestActivity(context: Context) {
-    val activity = context as Activity
-
-    Intent(activity, DevFestActivity::class.java).also { intent ->
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        activity.startActivity(intent)
-        activity.finish()
-    }
-}

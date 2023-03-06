@@ -12,11 +12,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-@ExperimentalPagerApi
 class DevFestActivity : ComponentActivity() {
+    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             val navController = rememberSwipeDismissableNavController()
             val viewModel = hiltViewModel<DevFestViewModel>()
             DevfestttttTheme {
