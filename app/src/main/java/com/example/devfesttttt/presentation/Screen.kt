@@ -4,6 +4,8 @@ sealed class Screen(val route: String) {
     object AuthenticationRoute : Screen("authentication_route")
     object DevFestRoute : Screen("dev_fest_route")
     object OnBoardingScreen : Screen("on_boarding_screen")
+    object SignInConfirmationScreen : Screen("sign_in_confirmation_screen")
+    object SignInScreen : Screen("sign_in_screen")
     object EventOptionsScreen : Screen("event_options_screen")
     object AgendaListScreen : Screen("agenda_list_screen")
     object AgendaDetailsScreen : Screen("agenda_details_screen")

@@ -37,7 +37,7 @@ fun EventOptionsScreen(navController: NavController) {
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(),
+                            .padding(bottom = 8.dp),
                         text = "DevFest 2023",
                         textAlign = TextAlign.Center
                     )

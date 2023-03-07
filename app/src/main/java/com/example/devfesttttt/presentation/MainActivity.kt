@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            moveToDevFestActivity()
+            goToAuthenticationActivity()
         }
     }
 
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun moveToDevFestActivity() {
+    private fun jumpToDevFestActivity() {
         Intent(this, DevFestActivity::class.java).also { intent ->
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
