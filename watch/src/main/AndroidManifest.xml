@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.phone">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,17 +8,18 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
-        android:name=".presentation.di.MyApp"
+        android:name="com.example.devfesttttt.presentation.di.MyApp"
         android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:icon="@drawable/ic_app_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
 
 
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="false" />
+<!--        <uses-library-->
+<!--            android:name="com.google.android.wearable"-->
+<!--            android:required="false" />-->
 
         <meta-data
             android:name="com.google.android.wearable.standalone"
@@ -28,7 +30,7 @@
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name=".presentation.authentication.ui.DataLayerListenerService"
+            android:name="com.example.devfesttttt.presentation.authentication.ui.DataLayerListenerService"
             android:exported="true">
             <intent-filter>
                 <!-- listeners receive events that match the action and data filters -->
@@ -48,21 +50,33 @@
         </service>
 
         <activity
-            android:name=".presentation.devfest.ui.DevFestActivity"
+            android:name="com.example.devfesttttt.presentation.devfest.ui.DevFestActivity"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
-            android:name=".presentation.authentication.ui.AuthenticationActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+            android:name="com.example.devfesttttt.presentation.authentication.ui.AuthenticationActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.example.android.wearable.datalayer.EXAMPLE" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="com.example.devfesttttt.presentation.MainActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.example.android.wearable.datalayer.EXAMPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

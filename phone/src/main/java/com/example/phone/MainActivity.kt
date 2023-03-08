@@ -155,6 +155,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }.awaitAll()
 
+                Log.d(TAG, "Node - $nodes")
                 Log.d(TAG, "Starting activity requests sent successfully")
             } catch (cancellationException: CancellationException) {
                 throw cancellationException
@@ -222,7 +223,7 @@ class MainActivity : ComponentActivity() {
         }
 
     companion object {
-        private const val TAG = "MainActivity"
+        private const val TAG = "MainActivityPhone"
 
         private const val START_ACTIVITY_PATH = "/start-activity"
         private const val COUNT_PATH = "/count"

@@ -105,6 +105,54 @@ fun SignInScreen(
                 )
             }
 
+            item {
+                Button(
+                    onClick = onQueryOtherDevicesClicked,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = stringResource(id = R.string.query_other_devices),
+                        modifier = Modifier.padding(4.dp))
+                }
+            }
+
+            item {
+                Button(
+                    onClick = onQueryMobileCameraClicked,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = stringResource(id = R.string.query_mobile_camera),
+                        modifier = Modifier.padding(4.dp))
+                }
+            }
+
+            if (events.isEmpty()) {
+                item {
+                    Text(
+                        stringResource(id = R.string.waiting),
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            } else {
+                items(events) { event ->
+                    Card(
+                        onClick = {},
+                        enabled = false
+                    ) {
+                        Column {
+                            Text(
+                                stringResource(id = event.title),
+                                style = MaterialTheme.typography.title3
+                            )
+                            Text(
+                                event.text,
+                                style = MaterialTheme.typography.body2
+                            )
+                        }
+                    }
+                }
+            }
+
         }
     }
 

@@ -54,7 +54,8 @@ class DataLayerListenerService : WearableListenerService() {
                                 nodeId,
                                 DATA_ITEM_RECEIVED_PATH,
                                 payload
-                            ).await()
+                            )
+                                .await()
                             Log.d(TAG, "Message sent successfully")
                         } catch (cancellationException: CancellationException) {
                             throw cancellationException

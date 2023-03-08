@@ -1,10 +1,4 @@
 <resources>
-    <string name="app_name">Devfesttttt</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">From the Square world,\nHello, %1$s!</string>
     <string name="waiting">Waiting for data to arrive\u2026</string>
     <string name="query_other_devices">Query for other devices</string>
     <string name="query_mobile_camera">Query for mobile camera</string>

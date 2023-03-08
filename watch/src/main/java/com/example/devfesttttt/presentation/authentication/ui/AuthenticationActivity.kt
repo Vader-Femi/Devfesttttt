@@ -37,6 +37,7 @@ class AuthenticationActivity : ComponentActivity(){
     private val clientDataViewModel by viewModels<ClientDataViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             val navController = rememberSwipeDismissableNavController()
             val viewModel = hiltViewModel<AuthenticationViewModel>()
@@ -62,8 +63,10 @@ class AuthenticationActivity : ComponentActivity(){
     private fun onQueryOtherDevicesClicked() {
         lifecycleScope.launch {
             try {
+                Log.d(TAG, "Querying Devices")
                 val nodes = getCapabilitiesForReachableNodes()
                     .filterValues { MOBILE_CAPABILITY in it || WEAR_CAPABILITY in it }.keys
+                Log.d(TAG, "Node - $nodes")
                 displayNodes(nodes)
             } catch (cancellationException: CancellationException) {
                 throw cancellationException
@@ -76,11 +79,15 @@ class AuthenticationActivity : ComponentActivity(){
     private fun onQueryMobileCameraClicked() {
         lifecycleScope.launch {
             try {
+                Log.d(TAG, "Querying Camera")
                 val nodes = getCapabilitiesForReachableNodes()
                     .filterValues { MOBILE_CAPABILITY in it && CAMERA_CAPABILITY in it }.keys
+                Log.d(TAG, "Node - $nodes")
                 displayNodes(nodes)
             } catch (cancellationException: CancellationException) {
+                Log.d(TAG, "Querying nodes failed: $cancellationException")
                 throw cancellationException
+
             } catch (exception: Exception) {
                 Log.d(TAG, "Querying nodes failed: $exception")
             }
@@ -139,7 +146,7 @@ class AuthenticationActivity : ComponentActivity(){
     }
 
     companion object {
-        private const val TAG = "MainActivity"
+        private const val TAG = "MainActivityPhone"
 
         private const val CAMERA_CAPABILITY = "camera"
         private const val WEAR_CAPABILITY = "wear"

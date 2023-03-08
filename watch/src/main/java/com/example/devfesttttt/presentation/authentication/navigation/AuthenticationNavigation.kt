@@ -9,6 +9,7 @@ import androidx.wear.compose.navigation.rememberSwipeDismissableNavHostState
 import com.example.devfesttttt.presentation.Screen
 import com.example.devfesttttt.presentation.authentication.ClientDataViewModel
 import com.example.devfesttttt.presentation.authentication.Event
+import com.example.devfesttttt.presentation.authentication.ui.MainApp
 import com.example.devfesttttt.presentation.authentication.ui.onboarding.OnBoardingScreen
 import com.example.devfesttttt.presentation.authentication.ui.signin.SignInConfirmationScreen
 import com.example.devfesttttt.presentation.authentication.ui.signin.SignInScreen
@@ -42,9 +43,10 @@ fun AuthenticationNavigation(
         }
 
         composable(route = Screen.SignInScreen.route) {
-            SignInScreen(
-                navController = navController,
-                viewModel = viewModel,
+//            SignInScreen(
+            MainApp(
+//                navController = navController,
+//                viewModel = viewModel,
                 events = events,
                 image = image,
                 onQueryOtherDevicesClicked = onQueryOtherDevicesClicked,

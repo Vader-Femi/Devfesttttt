@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Devfesttttt"
-include ':Watch'
-include ':phone'
+include ':watch', ':phone'
