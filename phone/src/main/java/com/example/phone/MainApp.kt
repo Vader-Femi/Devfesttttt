@@ -17,25 +17,24 @@ package com.example.phone
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
+import kotlin.reflect.KSuspendFunction1
 
 /**
  * The UI affording the actions the user can take, along with a list of the events and the image
@@ -43,52 +42,88 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun MainApp(
-    events: List<Event>,
     image: Bitmap?,
     isCameraSupported: Boolean,
     onTakePhotoClick: () -> Unit,
     onSendPhotoClick: () -> Unit,
-    onStartWearableActivityClick: () -> Unit
+    onSendEmail: KSuspendFunction1<String, Unit>,
+    onStartWearableActivityClick: () -> Unit,
 ) {
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
+    var email by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         item {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+            Box(modifier = Modifier.size(200.dp)) {
+                if (image == null) {
+                    Image(
+                        painterResource(id = R.drawable.ic_content_picture),
+                        contentDescription = stringResource(
+                            id = R.string.photo_placeholder
+                        ),
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    Image(
+                        image.asImageBitmap(),
+                        contentDescription = stringResource(
+                            id = R.string.captured_photo
+                        ),
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
+            Divider()
+        }
+        item {
+            Button(
+                onClick = onTakePhotoClick,
+                enabled = isCameraSupported
             ) {
-                Column(Modifier.weight(1f)) {
-                    Button(
-                        onClick = onTakePhotoClick,
-                        enabled = isCameraSupported
-                    ) {
-                        Text(stringResource(id = R.string.take_photo))
+                Text(stringResource(id = R.string.take_photo))
+            }
+            Divider()
+        }
+        item {
+            TextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text(stringResource(id = R.string.email)) },
+                maxLines = 2,
+                leadingIcon = {
+                    Icon(Icons.Filled.Email, "Email Icon")
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    capitalization = KeyboardCapitalization.None,
+                    autoCorrect = false,
+                    imeAction = ImeAction.Next
+                )
+            )
+            Divider()
+        }
+        item {
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        onSendEmail(email)
                     }
-                    Button(
-                        onClick = onSendPhotoClick,
-                        enabled = image != null
-                    ) {
-                        Text(stringResource(id = R.string.send_photo))
-                    }
-                }
-
-                Box(modifier = Modifier.size(100.dp)) {
-                    if (image == null) {
-                        Image(
-                            painterResource(id = R.drawable.ic_content_picture),
-                            contentDescription = stringResource(
-                                id = R.string.photo_placeholder
-                            ),
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    } else {
-                        Image(
-                            image.asImageBitmap(),
-                            contentDescription = stringResource(
-                                id = R.string.captured_photo
-                            ),
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
-                }
+                },
+                enabled = email != ""
+            ) {
+                Text(stringResource(id = R.string.send_email))
+            }
+            Divider()
+        }
+        item {
+            Button(
+                onClick = onSendPhotoClick,
+                enabled = image != null
+            ) {
+                Text(stringResource(id = R.string.send_photo))
             }
             Divider()
         }
@@ -98,54 +133,5 @@ fun MainApp(
             }
             Divider()
         }
-        items(events) { event ->
-            Column {
-                Text(
-                    stringResource(id = event.title),
-                )
-                Text(
-                    event.text
-                )
-            }
-            Divider()
-        }
     }
-}
-
-@Preview
-@Composable
-fun MainAppPreview() {
-    MainApp(
-        events = listOf(
-            Event(
-                title = R.string.data_item_changed,
-                text = "Event 1"
-            ),
-            Event(
-                title = R.string.data_item_deleted,
-                text = "Event 2"
-            ),
-            Event(
-                title = R.string.data_item_unknown,
-                text = "Event 3"
-            ),
-            Event(
-                title = R.string.message_from_watch,
-                text = "Event 4"
-            ),
-            Event(
-                title = R.string.data_item_changed,
-                text = "Event 5"
-            ),
-            Event(
-                title = R.string.data_item_deleted,
-                text = "Event 6"
-            )
-        ),
-        image = null,
-        isCameraSupported = true,
-        onTakePhotoClick = {},
-        onSendPhotoClick = {},
-        onStartWearableActivityClick = {}
-    )
 }

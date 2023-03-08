@@ -10,7 +10,7 @@ object OnBoardingData {
             OnBoardingItem(R.drawable.ic_android,
                 "We are glad to have you here at the conference"),
             OnBoardingItem(null,
-                "Don't forget to check in by tapping the scanner on your watch")
+                "I sha know you came for the swag and to meet celeb")
         )
     }
 

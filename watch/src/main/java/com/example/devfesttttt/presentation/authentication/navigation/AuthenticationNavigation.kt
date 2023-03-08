@@ -7,9 +7,6 @@ import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavHostState
 import com.example.devfesttttt.presentation.Screen
-import com.example.devfesttttt.presentation.authentication.ClientDataViewModel
-import com.example.devfesttttt.presentation.authentication.Event
-import com.example.devfesttttt.presentation.authentication.ui.MainApp
 import com.example.devfesttttt.presentation.authentication.ui.onboarding.OnBoardingScreen
 import com.example.devfesttttt.presentation.authentication.ui.signin.SignInConfirmationScreen
 import com.example.devfesttttt.presentation.authentication.ui.signin.SignInScreen
@@ -21,10 +18,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 fun AuthenticationNavigation(
     navController: NavHostController,
     viewModel: AuthenticationViewModel,
-    events: List<Event>,
     image: Bitmap?,
-    onQueryOtherDevicesClicked: () -> Unit,
-    onQueryMobileCameraClicked: () -> Unit
+    email: String?,
 ) {
 
     SwipeDismissableNavHost(
@@ -43,14 +38,11 @@ fun AuthenticationNavigation(
         }
 
         composable(route = Screen.SignInScreen.route) {
-//            SignInScreen(
-            MainApp(
-//                navController = navController,
-//                viewModel = viewModel,
-                events = events,
+            SignInScreen(
+                navController = navController,
+                viewModel = viewModel,
                 image = image,
-                onQueryOtherDevicesClicked = onQueryOtherDevicesClicked,
-                onQueryMobileCameraClicked = onQueryMobileCameraClicked
+                email = email
             )
         }
 

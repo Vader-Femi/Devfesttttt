@@ -19,6 +19,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -45,7 +46,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class ClientDataViewModel(
-    application: Application
+    application: Application,
 ) :
     AndroidViewModel(application),
     DataClient.OnDataChangedListener,
@@ -65,11 +66,15 @@ class ClientDataViewModel(
     var image by mutableStateOf<Bitmap?>(null)
         private set
 
+    var email by mutableStateOf<String?>(null)
+        private set
+
     private var loadPhotoJob: Job = Job().apply { complete() }
 
     @SuppressLint("VisibleForTests")
     override fun onDataChanged(dataEvents: DataEventBuffer) {
         // Add all events to the event log
+        //Ignore
         _events.addAll(
             dataEvents.map { dataEvent ->
                 val title = when (dataEvent.type) {
@@ -90,6 +95,12 @@ class ClientDataViewModel(
             when (dataEvent.type) {
                 DataEvent.TYPE_CHANGED -> {
                     when (dataEvent.dataItem.uri.path) {
+                        DataLayerListenerService.EMAIL_PATH -> {
+                            email = DataMapItem.fromDataItem(dataEvent.dataItem)
+                                .dataMap
+                                .getString(DataLayerListenerService.EMAIL_KEY)
+                            Log.d("EmailSending", email.toString())
+                        }
                         DataLayerListenerService.IMAGE_PATH -> {
                             loadPhotoJob.cancel()
                             loadPhotoJob = viewModelScope.launch {
@@ -98,6 +109,7 @@ class ClientDataViewModel(
                                         .dataMap
                                         .getAsset(DataLayerListenerService.IMAGE_KEY)
                                 )
+                                Log.d("EmailSending", image.toString())
                             }
                         }
                     }
@@ -136,10 +148,7 @@ class ClientDataViewModel(
     }
 }
 
-/**
- * A data holder describing a client event.
- */
 data class Event(
     @StringRes val title: Int,
-    val text: String
+    val text: String,
 )

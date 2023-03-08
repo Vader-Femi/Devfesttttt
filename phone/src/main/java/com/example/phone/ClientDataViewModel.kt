@@ -91,9 +91,7 @@ class ClientDataViewModel :
     }
 }
 
-/**
- * A data holder describing a client event.
- */
+
 data class Event(
     @StringRes val title: Int,
     val text: String
