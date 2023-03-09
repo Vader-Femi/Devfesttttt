@@ -6,13 +6,9 @@ interface BaseRepository{
 
     suspend fun userEmail(): String
 
-    suspend fun userFName(fName: String)
+    suspend fun userName(name: String)
 
-    suspend fun userFName(): String
-
-    suspend fun userLName(lName: String)
-
-    suspend fun userLName(): String
+    suspend fun userName(): String
 
     suspend fun userSignedIn(userSignedIn: Boolean)
 

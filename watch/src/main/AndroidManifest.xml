@@ -30,7 +30,7 @@
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name="com.example.devfesttttt.presentation.authentication.ui.DataLayerListenerService"
+            android:name="com.example.devfesttttt.presentation.DataLayerListenerService"
             android:exported="true">
             <intent-filter>
                 <!-- listeners receive events that match the action and data filters -->
@@ -55,16 +55,8 @@
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
             android:name="com.example.devfesttttt.presentation.authentication.ui.AuthenticationActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.example.android.wearable.datalayer.EXAMPLE" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
         </activity>
         <activity
             android:name="com.example.devfesttttt.presentation.MainActivity"

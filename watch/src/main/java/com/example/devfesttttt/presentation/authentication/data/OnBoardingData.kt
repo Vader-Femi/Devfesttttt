@@ -1,11 +1,14 @@
 package com.example.devfesttttt.presentation.authentication.data
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.example.devfesttttt.R
 
 object OnBoardingData {
     fun getItems(): List<OnBoardingItem> {
         return listOf(
-            OnBoardingItem(R.drawable.ic_android,
+            OnBoardingItem(
+                R.drawable.ic_android,
                 "Welcome To Devfest"),
             OnBoardingItem(R.drawable.ic_android,
                 "We are glad to have you here at the conference"),
@@ -15,7 +18,7 @@ object OnBoardingData {
     }
 
     data class OnBoardingItem(
-        val image: Int?,
+        @DrawableRes val image: Int?,
         val text: String
     )
 }

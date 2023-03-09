@@ -121,7 +121,7 @@ fun EventOptionsScreen(navController: NavController) {
                     Column{
                         Button(
                             modifier = Modifier.size(ButtonDefaults.DefaultButtonSize),
-                            onClick = {  }) {
+                            onClick = { navController.navigate(Screen.ProfileScreen.route) }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_profile),
                                 contentDescription = "Profile Icon",

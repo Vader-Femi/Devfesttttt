@@ -1,14 +1,13 @@
-package com.example.devfesttttt.presentation.authentication.ui.signin
+@file:OptIn(ExperimentalPagerApi::class)
+
+package com.example.devfesttttt.presentation.devfest.ui.profile
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.AbsoluteCutCornerShape
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,25 +25,31 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.wear.compose.material.*
 import com.example.devfesttttt.R
-import com.example.devfesttttt.presentation.authentication.viewmodel.AuthenticationViewModel
-import com.example.devfesttttt.presentation.devfest.ui.DevFestActivity
+import com.example.devfesttttt.presentation.authentication.ui.AuthenticationActivity
+import com.example.devfesttttt.presentation.devfest.viewmodel.DevFestViewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
-import kotlin.reflect.KSuspendFunction1
 
+
+@ExperimentalPagerApi
 @Composable
-fun SignInScreen(
+fun ProfileScreen(
     navController: NavController,
-    viewModel: AuthenticationViewModel,
-    profileImage: Bitmap?,
-    profileEmail: String?,
-    profileName: String?,
-    onSendPairingStatus: KSuspendFunction1<Boolean, Unit>
+    viewModel: DevFestViewModel,
 ) {
     val scrollState = rememberScalingLazyListState()
-    val context = LocalContext.current
+    var userName by remember { mutableStateOf("") }
+    var userEmail by remember { mutableStateOf("") }
+    var userProfile by remember { mutableStateOf<Bitmap?>(null) }
     val coroutineScope = rememberCoroutineScope()
-    var proceedButtonPosition by remember { mutableStateOf(0F) }
+    val context = LocalContext.current
+    LaunchedEffect(key1 = true) {
+        coroutineScope.launch {
+            userName = viewModel.userName()
+            userEmail = viewModel.userEmail()
+            userProfile = viewModel.profileImage()
+        }
+    }
     Scaffold(
         timeText = {
             TimeText(modifier = Modifier.scrollAway(scrollState))
@@ -62,130 +67,122 @@ fun SignInScreen(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 0.dp)
-                            .scrollAway(scrollState),
-                        text = "",
+                            .padding(bottom = 8.dp),
+                        text = "Profile",
                         textAlign = TextAlign.Center
                     )
                 }
             }
 
             item {
-                if (profileImage == null) {
+                if (userProfile == null) {
                     Image(
                         painter = painterResource(id = R.drawable.photo_placeholder),
                         contentScale = ContentScale.Crop,
                         contentDescription = "Profile picture",
                         modifier = Modifier
-                            .size(120.dp)
+                            .size(74.dp)
                             .clip(CircleShape)
                             .wrapContentSize(align = Alignment.Center),
                     )
                 } else {
                     Image(
-                        bitmap = profileImage.asImageBitmap(),
+                        bitmap = userProfile!!.asImageBitmap(),
                         contentScale = ContentScale.Crop,
                         contentDescription = "Profile picture",
                         modifier = Modifier
-                            .size(120.dp)
+                            .size(74.dp)
                             .clip(CircleShape)
-                            .wrapContentSize(align = Alignment.Center)
+                            .wrapContentSize(align = Alignment.Center),
                     )
                 }
-
+            }
+            item {
+                Spacer(modifier = Modifier.height(4.dp))
             }
 
-            if (profileImage != null &&
-                profileEmail != null &&
-                profileName != null
-            ) {
-
-                item {
-                    LaunchedEffect(key1 = true){
-                        Toast.makeText(context, "Pairing Complete\nClick Proceed to Continue", Toast.LENGTH_SHORT).show()
-                        scrollState.scrollToItem(proceedButtonPosition.roundToInt())
-                    }
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
+            if (userEmail != "" && userName != "") {
 
                 item {
                     Text(
-                        text = "Welcome, $profileName",
+                        text = "Welcome, $userName",
                         fontSize = 12.sp,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 }
-
                 item {
                     Text(
-                        text = profileEmail,
+                        text = userEmail,
                         fontSize = 12.sp,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 }
-
-                item {
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
-
                 item {
                     AnimatedVisibility(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(6.dp, 4.dp, 6.dp, 4.dp)
-                            .onGloballyPositioned { coordinates ->
-                                proceedButtonPosition = coordinates.positionInParent().y
-                            },
+                            .padding(6.dp, 4.dp, 6.dp, 4.dp),
                         visible = true
                     ) {
                         Button(
                             colors = ButtonDefaults.secondaryButtonColors(),
                             onClick = {
-                                profileImage.let {
-                                    viewModel.profileImage(it)
-                                }
-                                profileEmail.let {
-                                    viewModel.userEmail(it)
-                                }
-                                profileName.let {
-                                    viewModel.userName(it)
-                                }
                                 coroutineScope.launch {
-                                    viewModel.userSignedIn(true)
-                                    onSendPairingStatus(true)
+                                    viewModel.userSignedIn(false)
                                 }
-                                context.goToDevFestActivity()
+                                context.goToAuthenticationActivity()
                             },
                             modifier = Modifier
                                 .size(ButtonDefaults.ExtraSmallButtonSize)
                                 .padding(horizontal = 12.dp)
                         ) {
-                            Text(text = "Proceed")
+                            Text(text = "Sign Out")
                         }
                     }
                 }
             } else {
                 item {
                     Text(
-                        text = "Signing In..",
+                        text = "Not Signed In\nSign in with your phone to view your profile",
                         fontSize = 12.sp,
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 }
-            }
 
+                item {
+                    AnimatedVisibility(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(6.dp, 4.dp, 6.dp, 4.dp),
+                        visible = true
+                    ) {
+                        Button(
+                            colors = ButtonDefaults.secondaryButtonColors(),
+                            onClick = {
+                                context.goToAuthenticationActivity()
+                            },
+                            modifier = Modifier
+                                .size(ButtonDefaults.ExtraSmallButtonSize)
+                                .padding(horizontal = 12.dp)
+                        ) {
+                            Text(text = "Go to Sign In")
+                        }
+                    }
+                }
+            }
         }
+
     }
 
 }
 
-private fun Context.goToDevFestActivity() {
-    Intent(this, DevFestActivity::class.java).also { intent ->
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+private fun Context.goToAuthenticationActivity() {
+    Intent(this, AuthenticationActivity::class.java).also {
+        it.flags =
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(it)
     }
 }

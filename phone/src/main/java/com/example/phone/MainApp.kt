@@ -1,18 +1,3 @@
-/*
- * Copyright 2021 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.phone
 
 import android.graphics.Bitmap
@@ -22,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -36,10 +22,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import kotlin.reflect.KSuspendFunction1
 
-/**
- * The UI affording the actions the user can take, along with a list of the events and the image
- * to be sent to the wearable devices.
- */
 @Composable
 fun MainApp(
     image: Bitmap?,
@@ -47,9 +29,11 @@ fun MainApp(
     onTakePhotoClick: () -> Unit,
     onSendPhotoClick: () -> Unit,
     onSendEmail: KSuspendFunction1<String, Unit>,
+    onSendName: KSuspendFunction1<String, Unit>,
     onStartWearableActivityClick: () -> Unit,
 ) {
     var email by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
@@ -115,6 +99,37 @@ fun MainApp(
                 enabled = email != ""
             ) {
                 Text(stringResource(id = R.string.send_email))
+            }
+            Divider()
+        }
+        item {
+            TextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text(stringResource(id = R.string.name)) },
+                maxLines = 2,
+                leadingIcon = {
+                    Icon(Icons.Filled.Person, "Name Icon")
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    capitalization = KeyboardCapitalization.Words,
+                    autoCorrect = false,
+                    imeAction = ImeAction.Done
+                )
+            )
+            Divider()
+        }
+        item {
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        onSendName(name)
+                    }
+                },
+                enabled = name != ""
+            ) {
+                Text(stringResource(id = R.string.send_name))
             }
             Divider()
         }

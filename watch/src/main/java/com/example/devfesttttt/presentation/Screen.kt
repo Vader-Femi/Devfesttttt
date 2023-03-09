@@ -13,6 +13,7 @@ sealed class Screen(val route: String) {
     object SessionDetailsScreen : Screen("session_details_screen")
     object SpeakerListScreen : Screen("speaker_list_screen")
     object SpeakerDetailsScreen : Screen("speaker_details_screen")
+    object ProfileScreen : Screen("profile_screen")
 
     fun withIdArg(arg: Pair<String, Int>): String {
         return buildString {

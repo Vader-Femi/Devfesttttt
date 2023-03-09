@@ -14,8 +14,7 @@ class UserPreferences(private val context: Context) {
 
     private object PreferencesKeys {
         val KEY_USER_EMAIL = stringPreferencesKey("KEY_USER_EMAIL")
-        val KEY_USER_FNAME = stringPreferencesKey("KEY_USER_FNAME")
-        val KEY_USER_LNAME = stringPreferencesKey("KEY_USER_LNAME")
+        val KEY_USER_NAME = stringPreferencesKey("KEY_USER_NAME")
         val KEY_USER_SIGNED_IN = booleanPreferencesKey("KEY_USER_SIGNED_IN")
     }
 
@@ -30,25 +29,14 @@ class UserPreferences(private val context: Context) {
         }
     }
 
-    val userFName: Flow<String>
+    val userName: Flow<String>
         get() = context.dataStore.data.map { preference ->
-            preference[PreferencesKeys.KEY_USER_FNAME] ?: ""
+            preference[PreferencesKeys.KEY_USER_NAME] ?: ""
         }
 
-    suspend fun userFName(fName: String) {
+    suspend fun userName(fName: String) {
         context.dataStore.edit { preferences ->
-            preferences[PreferencesKeys.KEY_USER_FNAME] = fName
-        }
-    }
-
-    val userLName: Flow<String>
-        get() = context.dataStore.data.map { preference ->
-            preference[PreferencesKeys.KEY_USER_LNAME] ?: ""
-        }
-
-    suspend fun userLName(lName: String) {
-        context.dataStore.edit { preferences ->
-            preferences[PreferencesKeys.KEY_USER_LNAME] = lName
+            preferences[PreferencesKeys.KEY_USER_NAME] = fName
         }
     }
 

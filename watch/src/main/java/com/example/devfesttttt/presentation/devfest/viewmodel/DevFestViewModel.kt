@@ -1,5 +1,6 @@
 package com.example.devfesttttt.presentation.devfest.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.devfesttttt.presentation.BaseViewModel
 import com.example.devfesttttt.presentation.devfest.data.Agenda
@@ -11,8 +12,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DevFestViewModel @Inject constructor(
-    private val repository: DevFestRepositoryImpl
-): BaseViewModel(repository){
+    private val repository: DevFestRepositoryImpl,
+    application: Application
+): BaseViewModel(repository, application){
 
     fun getAgenda(): LiveData<List<Agenda>> =
         repository.getAgenda()

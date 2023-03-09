@@ -17,7 +17,6 @@ class DevFestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
             val navController = rememberSwipeDismissableNavController()
             val viewModel = hiltViewModel<DevFestViewModel>()
             DevfestttttTheme {

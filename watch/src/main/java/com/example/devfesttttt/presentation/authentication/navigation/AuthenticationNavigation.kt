@@ -12,14 +12,17 @@ import com.example.devfesttttt.presentation.authentication.ui.signin.SignInConfi
 import com.example.devfesttttt.presentation.authentication.ui.signin.SignInScreen
 import com.example.devfesttttt.presentation.authentication.viewmodel.AuthenticationViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
+import kotlin.reflect.KSuspendFunction1
 
 @ExperimentalPagerApi
 @Composable
 fun AuthenticationNavigation(
     navController: NavHostController,
     viewModel: AuthenticationViewModel,
-    image: Bitmap?,
-    email: String?,
+    profileImage: Bitmap?,
+    profileEmail: String?,
+    profileName: String?,
+    onSendPairingStatus: KSuspendFunction1<Boolean, Unit>,
 ) {
 
     SwipeDismissableNavHost(
@@ -41,8 +44,10 @@ fun AuthenticationNavigation(
             SignInScreen(
                 navController = navController,
                 viewModel = viewModel,
-                image = image,
-                email = email
+                profileImage = profileImage,
+                profileEmail = profileEmail,
+                profileName = profileName,
+                onSendPairingStatus = onSendPairingStatus
             )
         }
 

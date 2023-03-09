@@ -18,7 +18,7 @@ data class Session(
     val sessionName: String,
 
     @ColumnInfo(name = "session_icon")
-    val sessionIcon: Int = R.drawable.ic_app_logo,
+    val sessionIcon: Int,
 
     @ColumnInfo(name = "session_talks")
     val sessionTalks: List<SessionTalk>

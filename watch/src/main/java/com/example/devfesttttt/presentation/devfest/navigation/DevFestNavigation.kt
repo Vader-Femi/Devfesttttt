@@ -11,6 +11,7 @@ import com.example.devfesttttt.presentation.Screen
 import com.example.devfesttttt.presentation.devfest.ui.EventOptionsScreen
 import com.example.devfesttttt.presentation.devfest.ui.agenda.AgendaDetailsScreen
 import com.example.devfesttttt.presentation.devfest.ui.agenda.AgendaListScreen
+import com.example.devfesttttt.presentation.devfest.ui.profile.ProfileScreen
 import com.example.devfesttttt.presentation.devfest.ui.session.SessionDetailsScreen
 import com.example.devfesttttt.presentation.devfest.ui.session.SessionListScreen
 import com.example.devfesttttt.presentation.devfest.ui.speaker.SpeakerDetailsScreen
@@ -91,6 +92,10 @@ fun DevFestNavigation(
                 viewModel = viewModel,
                 speaker_id = entry.arguments?.getInt("speaker_id") ?: 0
             )
+        }
+
+        composable(route = Screen.ProfileScreen.route) {
+            ProfileScreen(navController = navController, viewModel = viewModel)
         }
 
     }

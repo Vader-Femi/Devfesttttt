@@ -97,8 +97,8 @@ private fun OnBoardingViewPager(
                     onClick = {
                           navController.navigate(Screen.SignInConfirmationScreen.route)
                     },
-                    modifier = Modifier.
-                    size(ButtonDefaults.ExtraSmallButtonSize)
+                    modifier = Modifier
+                        .size(ButtonDefaults.ExtraSmallButtonSize)
                         .padding(horizontal = 12.dp)
                 ) {
                     Text(text = "Let's go")
