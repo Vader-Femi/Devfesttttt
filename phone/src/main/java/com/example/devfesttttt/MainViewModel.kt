@@ -10,7 +10,7 @@ import com.example.devfesttttt.MainActivity.Companion.PAIRING_COMPLETE_KEY
 import com.example.devfesttttt.MainActivity.Companion.PAIRING_COMPLETE_PATH
 import com.google.android.gms.wearable.*
 
-class ClientDataViewModel :
+class MainViewModel :
     ViewModel(),
     DataClient.OnDataChangedListener{
 

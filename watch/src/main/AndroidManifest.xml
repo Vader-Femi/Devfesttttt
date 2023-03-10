@@ -8,7 +8,7 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
-        android:name="com.example.devfesttttt.presentation.di.MyApp"
+        android:name=".presentation.di.MyApp"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@drawable/ic_app_logo"
@@ -30,7 +30,7 @@
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name="com.example.devfesttttt.presentation.DataLayerListenerService"
+            android:name=".presentation.DataLayerListenerService"
             android:exported="true">
             <intent-filter>
                 <!-- listeners receive events that match the action and data filters -->
@@ -50,16 +50,16 @@
         </service>
 
         <activity
-            android:name="com.example.devfesttttt.presentation.devfest.ui.DevFestActivity"
+            android:name=".presentation.devfest.ui.DevFestActivity"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity
-            android:name="com.example.devfesttttt.presentation.authentication.ui.AuthenticationActivity"
+            android:name=".presentation.authentication.ui.AuthenticationActivity"
             android:exported="false"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" >
         </activity>
         <activity
-            android:name="com.example.devfesttttt.presentation.MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:theme="@android:style/Theme.DeviceDefault">
             <intent-filter>

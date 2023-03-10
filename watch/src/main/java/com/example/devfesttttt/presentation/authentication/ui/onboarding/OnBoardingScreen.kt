@@ -1,11 +1,16 @@
 package com.example.devfesttttt.presentation.authentication.ui.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -13,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.wear.compose.foundation.*
 import androidx.wear.compose.material.*
 import com.example.devfesttttt.presentation.Screen
 import com.example.devfesttttt.presentation.authentication.data.OnBoardingData
@@ -22,33 +28,28 @@ import com.google.accompanist.pager.*
 @ExperimentalPagerApi
 @Composable
 fun OnBoardingScreen(navController: NavController, viewModel: AuthenticationViewModel) {
-    val scrollState = rememberScalingLazyListState()
     val pagerState = rememberPageState()
-    ScalingLazyColumn(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize(),
-        state = scrollState
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
     ) {
-        item {
-            OnBoardingViewPager(
-                navController,
-                item = OnBoardingData.getItems(),
-                pagerState = pagerState,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-//        HorizontalPagerIndicator(
-//            modifier = Modifier
-//                .padding(0.dp, 20.dp, 0.dp, 20.dp)
-//                .fillMaxWidth(),
-//            pagerState = pagerState,
-//            indicatorHeight = 8.dp,
-//            indicatorWidth = 12.dp,
-//            inactiveColor = MaterialTheme.colors.primaryVariant,
-//            activeColor = MaterialTheme.colors.primary,
-//            spacing = 12.dp
-//        )
+
+        OnBoardingViewPager(
+            navController,
+            item = OnBoardingData.getItems(),
+            pagerState = pagerState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
+        )
+        HorizontalPagerIndicator(
+            modifier = Modifier
+                .padding(bottom = 7.dp)
+                .align(Alignment.BottomCenter),
+            pagerState = pagerState,
+            inactiveColor = Color.Gray,
+            activeColor = Color.White,
+        )
     }
 }
 
@@ -67,25 +68,33 @@ private fun OnBoardingViewPager(
     ) { page ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
+            verticalArrangement = Arrangement.SpaceBetween,
             modifier = modifier
         ) {
             if (item[page].image != null) {
-                Icon(
-                    modifier = Modifier,
+//                Icon(
+//                    modifier = Modifier,
+//                    painter = painterResource(id = item[page].image!!),
+//                    contentDescription = "Devfest Logo"
+//                )
+                Image(
                     painter = painterResource(id = item[page].image!!),
-                    contentDescription = "Devfest Logo"
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "Devfest Logo",
+                    modifier = Modifier
+                        .size(54.dp)
+                        .clip(CircleShape)
                 )
             }
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(14.dp),
                 text = item[page].text,
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = FontWeight.Normal,
                 textAlign = TextAlign.Center,
                 style = TextStyle(
-                    fontSize = 16.sp
+                    fontSize = 14.sp
                 )
             )
             AnimatedVisibility(
@@ -95,7 +104,7 @@ private fun OnBoardingViewPager(
                 Button(
                     colors = ButtonDefaults.secondaryButtonColors(),
                     onClick = {
-                          navController.navigate(Screen.SignInConfirmationScreen.route)
+                        navController.navigate(Screen.SignInConfirmationScreen.route)
                     },
                     modifier = Modifier
                         .size(ButtonDefaults.ExtraSmallButtonSize)

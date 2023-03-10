@@ -3,18 +3,11 @@ package com.example.devfesttttt
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -39,7 +32,6 @@ import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.net.URL
 import java.time.Instant
 
@@ -50,7 +42,7 @@ class MainActivity : ComponentActivity() {
     private val messageClient by lazy { Wearable.getMessageClient(this) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(this) }
 
-    private val viewModel by viewModels<ClientDataViewModel>()
+    private val viewModel by viewModels<MainViewModel>()
 
     private val signInLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
@@ -130,17 +122,6 @@ class MainActivity : ComponentActivity() {
                                 .fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
-                            /*
-                            MainApp(
-                                image = viewModel.image,
-                                isCameraSupported = isCameraSupported,
-                                onTakePhotoClick = ::takePhoto,
-                                onSendPhotoClick = ::sendPhoto,
-                                onSendEmail = ::sendEmailAddress,
-                                onSendName = ::sendName,
-                                onStartWearableActivityClick = ::startWearableActivity
-                            )
-                            */
                             MyApp(
                                 email = viewModel.email,
                                 name = viewModel.name,
@@ -173,11 +154,6 @@ class MainActivity : ComponentActivity() {
         val oneTapClient = Identity.getSignInClient(this)
         oneTapClient.signOut()
         val signInRequest = BeginSignInRequest.builder()
-//            .setPasswordRequestOptions(
-//                PasswordRequestOptions.builder()
-//                    .setSupported(true)
-//                    .build()
-//            )
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
@@ -199,8 +175,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Sign In - $it", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "Sign In: $it")
+                Toast.makeText(this, "Sign In: $it", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Sign In: $it")
                 signUp()
             }
 
@@ -209,11 +185,6 @@ class MainActivity : ComponentActivity() {
     private fun signUp() {
         val oneTapClient = Identity.getSignInClient(this)
         val signUpRequest = BeginSignInRequest.builder()
-//            .setPasswordRequestOptions(
-//                PasswordRequestOptions.builder()
-//                    .setSupported(true)
-//                    .build()
-//            )
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
@@ -233,8 +204,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
             .addOnFailureListener(this) {
-                Toast.makeText(this, "Sign Up - $it", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "Sign Up: $it")
+                Toast.makeText(this, "Sign Up: $it", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Sign Up: $it")
             }
     }
 
@@ -268,6 +239,12 @@ class MainActivity : ComponentActivity() {
                     }
                 }.awaitAll()
 
+                val numberOfNodes = nodes.size
+                if (numberOfNodes == 0)
+                    Toast.makeText(this@MainActivity, "You're not connected to a wear OS device", Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(this@MainActivity, "Intent sent. Check your wear OS device(s)", Toast.LENGTH_SHORT).show()
+
                 Log.d(TAG, "Starting activity : $nodes")
             } catch (cancellationException: CancellationException) {
                 Log.d(TAG, "Starting activity: $cancellationException")
@@ -280,10 +257,11 @@ class MainActivity : ComponentActivity() {
 
     private suspend fun sendPhoto() {
         try {
-            val image = viewModel.image ?: BitmapFactory.decodeResource(
-                resources,
-                R.drawable.twotone_baby_changing_station_24
-            );
+            if (viewModel.image == null){
+                Toast.makeText(this, "Please wait for an image to load", Toast.LENGTH_SHORT).show()
+                return
+            }
+            val image = viewModel.image!!
             val imageAsset = image.toAsset()
             val request = PutDataMapRequest.create(IMAGE_PATH).apply {
                 dataMap.putAsset(IMAGE_KEY, imageAsset)
