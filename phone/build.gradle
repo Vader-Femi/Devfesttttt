@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.phone'
+    namespace 'com.example.devfesttttt'
     compileSdk 33
 
     defaultConfig {
@@ -15,6 +15,8 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "WEB_CLIENT_ID", '"882147263705-aajs0lmh2rjfdcg2m5goff4olrkbldi5.apps.googleusercontent.com"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -76,4 +78,7 @@ dependencies {
 
     //Coroutine for sending synchronously
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
+
+    //Sign-In with Google
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
 }

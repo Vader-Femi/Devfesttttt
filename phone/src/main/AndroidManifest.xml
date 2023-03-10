@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.phone">
+    package="com.example.devfesttttt">
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
