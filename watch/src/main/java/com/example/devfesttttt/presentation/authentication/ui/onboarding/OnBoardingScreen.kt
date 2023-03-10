@@ -49,6 +49,8 @@ fun OnBoardingScreen(navController: NavController, viewModel: AuthenticationView
             pagerState = pagerState,
             inactiveColor = Color.Gray,
             activeColor = Color.White,
+            indicatorWidth = 6.dp,
+            indicatorHeight = 6.dp
         )
     }
 }
@@ -72,11 +74,6 @@ private fun OnBoardingViewPager(
             modifier = modifier
         ) {
             if (item[page].image != null) {
-//                Icon(
-//                    modifier = Modifier,
-//                    painter = painterResource(id = item[page].image!!),
-//                    contentDescription = "Devfest Logo"
-//                )
                 Image(
                     painter = painterResource(id = item[page].image!!),
                     contentScale = ContentScale.Crop,
