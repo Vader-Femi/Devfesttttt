@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,7 +46,7 @@ fun MyApp(
                         contentDescription = "Profile picture",
                         modifier = Modifier
                             .size(90.dp)
-                            .clip(CircleShape)
+                            .clip(RoundedCornerShape(30))
                             .wrapContentSize(align = Alignment.Center),
                     )
                 }
@@ -99,7 +100,7 @@ fun MyApp(
         }
 
         item {
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(50.dp))
         }
 
         item {

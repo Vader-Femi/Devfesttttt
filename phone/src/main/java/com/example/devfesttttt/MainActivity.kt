@@ -35,7 +35,6 @@ import java.io.ByteArrayOutputStream
 import java.net.URL
 import java.time.Instant
 
-
 class MainActivity : ComponentActivity() {
 
     private val dataClient by lazy { Wearable.getDataClient(this) }
@@ -43,6 +42,7 @@ class MainActivity : ComponentActivity() {
     private val capabilityClient by lazy { Wearable.getCapabilityClient(this) }
 
     private val viewModel by viewModels<MainViewModel>()
+    private val oneTapClient by lazy { Identity.getSignInClient(this) }
 
     private val signInLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
@@ -59,9 +59,10 @@ class MainActivity : ComponentActivity() {
                             try {
                                 val url =
                                     URL(credentials.profilePictureUri.toString())
-                                val image = BitmapFactory.decodeStream(
-                                    url.openConnection().getInputStream()
+                                var image = BitmapFactory.decodeStream(
+                                    url.openConnection().inputStream
                                 )
+                                image = Bitmap.createScaledBitmap(image, 528, 560, true)
                                 viewModel.onPictureTaken(image)
                             } catch (e: Exception) {
                                 Toast.makeText(this@MainActivity, "Cannot download your profile image, so settle for that", Toast.LENGTH_LONG).show()
@@ -151,8 +152,6 @@ class MainActivity : ComponentActivity() {
 
     private fun signIn() {
 
-        val oneTapClient = Identity.getSignInClient(this)
-        oneTapClient.signOut()
         val signInRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
@@ -183,7 +182,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun signUp() {
-        val oneTapClient = Identity.getSignInClient(this)
         val signUpRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
@@ -211,7 +209,6 @@ class MainActivity : ComponentActivity() {
 
     private fun signOut() {
         viewModel.setSignInStatus(false)
-        val oneTapClient = Identity.getSignInClient(this)
         oneTapClient.signOut()
     }
 
