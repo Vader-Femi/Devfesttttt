@@ -7,4 +7,5 @@
  * Room Database for well, the database
  * Google's One Tap Client Client to log in and get the profile picture, email, and name from your phone
  * Wear's CapabilityClient APIs i.e MessageClient to start the wear activity from your phone (because you can) and DataClient for sending your profile picture, email, and
-   name to the paired Wear device 
+   name to the paired Wear device (Shoutout to github.com/android/wear-os-samples)
+
