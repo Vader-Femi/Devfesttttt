@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "WEB_CLIENT_ID", '"882147263705-aajs0lmh2rjfdcg2m5goff4olrkbldi5.apps.googleusercontent.com"'
+        buildConfigField "String", "WEB_CLIENT_ID", '"PLACE_YOUR_WEBCLIENTID_HERE"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
