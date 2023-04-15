@@ -1,6 +1,5 @@
 ## Devfesttttt
- I'm bad at writing documantation.
- We made a Wear Os version of the DevFest App we saw at DevFest 2022.
+ We made a Wear Os version of the DevFest App we saw at DevFest 2022. And in case you're wondering, it's Devfesttttt (with 5 t).
  
  ##  Before you run
  To use the sign-in with Google feature in the phone module, first open the build.gradle for the phone module and paste your WEB_CLIENT_ID for your Google account.
