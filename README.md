@@ -1,14 +1,15 @@
 ## Devfesttttt
- I'm bad at writing documantation.
- We made a Wear Os version of the DevFest App we saw at DevFest 2022.
- I used:
+ We made a Wear Os version of the DevFest App we saw at DevFest 2022. And in case you're wondering, it's Devfesttttt (with 5 t).
  
+ ##  Before you run
+ To use the sign-in with Google feature in the phone module, first open the build.gradle for the phone module and paste your WEB_CLIENT_ID for your Google account.
+ 
+ ##  Now for the development, I used:
  * Jetpack Compose for building the UI
  * Room Database for well, the databases
  * Dagger-Hilt for dependency injection
  * Google's One Tap Client Client to log in and get the profile picture, email, and name from your phone
- * Wear's CapabilityClient APIs i.e MessageClient to start the wear activity from your phone (because you can) and DataClient for sending your profile picture, email,      and name to the paired Wear device (Shoutout to github.com/android/wear-os-samples)
+ * Wear's CapabilityClient APIs i.e MessageClient to start the wear activity from your phone (because you can) and DataClient for sending your profile picture, email, and name to the paired Wear device (Shoutout to github.com/android/wear-os-samples)
 
 ##  License
-
 [Apache License](LICENSE)
