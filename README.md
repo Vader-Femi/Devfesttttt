@@ -1,4 +1,4 @@
-<img src="devfesttttt.png" alt="Devfesttttt Image" width="700" />
+<img src="devfesttttt.jpg" alt="Devfesttttt Image" width="700" />
 
 <a href="https://www.figma.com/file/y8xymmhonOeNQBj7P9Dfll?node-id=109:4533&comments-enabled=1&viewer=1" target="_blank" rel="nofollow noopener noreferrer" 
   aria-label="Figma Link"> <u>Figma Link</u> </a> <a href="https://www.figma.com/file/y8xymmhonOeNQBj7P9Dfll/Devfest-Wearable-App?type=design&t=lfuIwUIEFoWmH1li-6" target="_blank" rel="nofollow noopener noreferrer" aria-label="Case Study"> <u>Case Study</u> </a>
