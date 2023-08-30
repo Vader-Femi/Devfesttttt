@@ -1,12 +1,12 @@
-<img src="devfesttttt.jpg" alt="Devfesttttt Image" width="700" />
+<img src="devfesttttt.jpg" alt="Devfesttttt Image" width="1000" />
 
-<a href="https://www.figma.com/file/y8xymmhonOeNQBj7P9Dfll?node-id=109:4533&comments-enabled=1&viewer=1" target="_blank" rel="nofollow noopener noreferrer" 
-  aria-label="Figma Link"> <u>Figma Link</u> </a> <a href="https://www.figma.com/file/y8xymmhonOeNQBj7P9Dfll/Devfest-Wearable-App?type=design&t=lfuIwUIEFoWmH1li-6" target="_blank" rel="nofollow noopener noreferrer" aria-label="Case Study"> <u>Case Study</u> </a>
+<a href="https://www.figma.com/file/y8xymmhonOeNQBj7P9Dfll?node-id=109:4533&comments-enabled=1&viewer=1" target="_blank" rel="nofollow noopener noreferrer" aria-label="Figma Link"> <u>Figma Link</u> </a> 
+<a href="https://www.figma.com/file/y8xymmhonOeNQBj7P9Dfll/Devfest-Wearable-App?type=design&t=lfuIwUIEFoWmH1li-6" target="_blank" rel="nofollow noopener noreferrer" aria-label="Case Study"> <u>Case Study</u> </a>
 
 
 # Devfesttttt
 We made a Wear Os version of the DevFest App we saw at DevFest 2022. And in case you're wondering, it's Devfesttttt (with 5 t). 
-<a href="https://twitter.com/ZeezCrypto" target="_blank" rel="nofollow noopener noreferrer" aria-label="Adeleke Azeez"> <u>Adeleke Azeez</u> </a> did the Case Study and Figma Designs and <a href="https://twitter.com/FemiOkedeyi" target="_blank" rel="nofollow noopener noreferrer" aria-label="I"> <u>I</u> </a> did the Wear and Android Apps.
+<a href="https://twitter.com/ZeezCrypto" target="_blank" rel="nofollow noopener noreferrer" aria-label="Adeleke Azeez"> <u>Adeleke Azeez</u> </a> did the Case Study and Figma Designs and <a href="https://twitter.com/FemiOkedeyi" target="_blank" rel="nofollow noopener noreferrer" aria-label="My Twitter"> <u>I did</u> </a> the Wear and Android Apps.
 
  ---
  
