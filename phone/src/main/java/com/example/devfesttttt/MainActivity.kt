@@ -4,6 +4,8 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+
+
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -117,6 +119,11 @@ class MainActivity : ComponentActivity() {
                                 ).show()
                         }
 
+                        LaunchedEffect(key1 = viewModel.isSignedIn){
+                            if (viewModel.isSignedIn)
+                                sendToWear()
+                        }
+
                         Box(
                             modifier = Modifier
                                 .padding(it)
@@ -151,7 +158,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun signIn() {
-
         val signInRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()

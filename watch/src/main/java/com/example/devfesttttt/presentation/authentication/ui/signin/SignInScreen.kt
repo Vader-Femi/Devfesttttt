@@ -169,7 +169,7 @@ fun SignInScreen(
             } else {
                 item {
                     Text(
-                        text = "Signing In..",
+                        text = "Sign In on your phone\nThen click the \"Send to Wear\" button",
                         fontSize = 12.sp,
                         modifier = Modifier
                             .fillMaxWidth(),
