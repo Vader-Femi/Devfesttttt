@@ -11,7 +11,8 @@ We made a Wear Os version of the DevFest App we saw at DevFest 2022. And in case
  ---
  
  ##  Before you run
- To use the sign-in with Google feature in the phone module, first open the build.gradle for the phone module and paste your WEB_CLIENT_ID for your Google account.
+To use the sign-in with Google feature in the phone module, first open the local.properties file and paste your WEB_CLIENT_ID for your Google account.
+i.e WEB_CLIENT_ID="PASTE_YOUR_KEY_HERE"
 
  ---
  

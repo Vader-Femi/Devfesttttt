@@ -244,7 +244,7 @@ class MainActivity : ComponentActivity() {
 
                 val numberOfNodes = nodes.size
                 if (numberOfNodes == 0)
-                    Toast.makeText(this@MainActivity, "You're not connected to a wear OS device", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "You're not connected to a wear OS device or app not installed on watch", Toast.LENGTH_SHORT).show()
                 else
                     Toast.makeText(this@MainActivity, "Intent sent. Check your wear OS device(s)", Toast.LENGTH_SHORT).show()
 
